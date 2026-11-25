@@ -6,7 +6,7 @@
     "authors": [
         "EngHell"
     ],
-    "description": "TODO",
+    "description": "Pick how slabs are placed from the tool mode menu (F): the vanilla auto/horizontal/vertical modes, or lock the slab to the top, bottom, or one side, relative to you or by compass direction.",
     "version": "0.0.1",
     "dependencies": {
         "game": "1.22.0"
