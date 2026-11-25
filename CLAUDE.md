@@ -3,7 +3,7 @@
 Vintage Story code mod (modid `usableslabs`, C#, net10.0). Layout matches the sibling `../cook_ui` repo.
 
 ## Layout
-- `UsableSlabs/` — the mod: `modinfo.json`, `UsableSlabsModSystem.cs`, `assets/usableslabs/` (lang: `en`, `es-419`).
+- `UsableSlabs/` — the mod: `modinfo.json`, `UsableSlabsModSystem.cs`, `assets/usableslabs/` (lang: `en`, `es-419`, `es-es`).
 - `ZZCakeBuild/` — Cake packaging: `./build.sh` validates asset JSON, publishes Release, writes `Releases/usableslabs_<version>.zip`.
 - `Directory.Build.props` — `VINTAGE_STORY` defaults to `../base_game` (shared local game copy, not versioned).
 - `.github/workflows/release.yml` — pushing tag `vX.Y.Z` builds against the server package and creates a GitHub release. The tag must equal `version` in `modinfo.json`.
@@ -17,6 +17,6 @@ Vintage Story code mod (modid `usableslabs`, C#, net10.0). Layout matches the si
 ## Conventions
 - Prefer reading game behaviour from the decompiled/vanilla sources and DLLs in `../base_game` over guessing; compare against `../versions/*` when targeting other game versions.
 - Log with a `[usableslabs]` prefix.
-- Keep every user-facing string in the lang files; add both `en` and `es-419`.
+- Keep every user-facing string in the lang files; add `en`, `es-419` and `es-es`.
 - Release: bump `version` in `modinfo.json` in its own commit ("Bump version to X.Y.Z"), then tag `vX.Y.Z`.
 - An untracked `pending.md` at the repo root may hold a hand-off from a previous session; read it first if present.
