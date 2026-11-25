@@ -1,0 +1,72 @@
+# Builds the mod zip and publishes it as a GitHub release when a version tag is pushed.
+#   git tag v0.0.2 && git push origin v0.0.2
+# The tag (without "v") must match "version" in UsableSlabs/modinfo.json.
+name: Release
+
+on:
+  push:
+    tags: ["v[0-9]*"]
+
+permissions:
+  contents: write # create the release and upload the zip
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Game version to compile against. Only the server package (~54 MB) is downloaded;
+      # it has every DLL the project references.
+      VS_VERSION: "1.22.7"
+      VINTAGE_STORY: ${{ github.workspace }}/.vslibs
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check tag matches modinfo.json version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(jq -r .version UsableSlabs/modinfo.json)"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match modinfo.json version $version"
+            exit 1
+          fi
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Cache game libraries
+        id: vs-cache
+        uses: actions/cache@v4
+        with:
+          path: .vslibs
+          key: vs-server-${{ env.VS_VERSION }}
+
+      - name: Download game libraries
+        if: steps.vs-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .vslibs
+          curl -fsSL --retry 3 \
+            "https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_${VS_VERSION}.tar.gz" \
+          | tar xz -C .vslibs \
+              VintagestoryAPI.dll \
+              Lib/0Harmony.dll Lib/cairo-sharp.dll Lib/Microsoft.Data.Sqlite.dll \
+              Lib/Newtonsoft.Json.dll Lib/protobuf-net.dll \
+              Mods/VSCreativeMod.dll Mods/VSEssentials.dll Mods/VSSurvivalMod.dll
+
+      - name: Build and package
+        run: ./build.sh
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" Releases/*.zip \
+            --title "$GITHUB_REF_NAME" --generate-notes --verify-tag

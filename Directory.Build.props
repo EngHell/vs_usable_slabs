@@ -1,0 +1,6 @@
+<Project>
+  <!-- Fall back to the local game copy when the VINTAGE_STORY env var isn't set. -->
+  <PropertyGroup Condition="'$(VINTAGE_STORY)' == ''">
+    <VINTAGE_STORY>$(MSBuildThisFileDirectory)../base_game</VINTAGE_STORY>
+  </PropertyGroup>
+</Project>
