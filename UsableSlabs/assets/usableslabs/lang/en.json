@@ -1,1 +1,20 @@
-{}
+{
+	"mode-auto": "Auto (vanilla)",
+	"mode-horizontal": "Horizontal only (vanilla)",
+	"mode-vertical": "Vertical only (vanilla)",
+	"side-down": "Lock: bottom half",
+	"side-up": "Lock: top half",
+	"side-north": "Lock: north side",
+	"side-east": "Lock: east side",
+	"side-south": "Lock: south side",
+	"side-west": "Lock: west side",
+	"side-far": "Lock: far side (away from you)",
+	"side-right": "Lock: right side",
+	"side-near": "Lock: near side (toward you)",
+	"side-left": "Lock: left side",
+	"mode-toggle-to-compass": "Sides are relative to you. Click to use compass directions",
+	"mode-toggle-to-relative": "Sides are compass directions. Click to make them relative to you",
+	"msg-now-relative": "Slab sides are now relative to where you look (far/near/left/right).",
+	"msg-now-compass": "Slab sides are now compass directions (north/east/south/west).",
+	"heldinfo-locked": "Placement: <font color=\"#648cd5\">{0}</font>"
+}

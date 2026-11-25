@@ -1,1 +1,20 @@
-{}
+{
+	"mode-auto": "Automático (vanilla)",
+	"mode-horizontal": "Solo horizontal (vanilla)",
+	"mode-vertical": "Solo vertical (vanilla)",
+	"side-down": "Fijar: mitad inferior",
+	"side-up": "Fijar: mitad superior",
+	"side-north": "Fijar: lado norte",
+	"side-east": "Fijar: lado este",
+	"side-south": "Fijar: lado sur",
+	"side-west": "Fijar: lado oeste",
+	"side-far": "Fijar: lado lejano (opuesto a ti)",
+	"side-right": "Fijar: lado derecho",
+	"side-near": "Fijar: lado cercano (hacia ti)",
+	"side-left": "Fijar: lado izquierdo",
+	"mode-toggle-to-compass": "Los lados son relativos a ti. Clic para usar puntos cardinales",
+	"mode-toggle-to-relative": "Los lados son puntos cardinales. Clic para hacerlos relativos a ti",
+	"msg-now-relative": "Los lados de las losas ahora son relativos a donde miras (lejano/cercano/izquierda/derecha).",
+	"msg-now-compass": "Los lados de las losas ahora son puntos cardinales (norte/este/sur/oeste).",
+	"heldinfo-locked": "Colocación: <font color=\"#648cd5\">{0}</font>"
+}
